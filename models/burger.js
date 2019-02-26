@@ -2,14 +2,14 @@
 let orm = require("../config/orm.js");
 
 //ORM functions
-let burgers = {
+let burger = {
     all: function(callBack){
-        orm.all("burgers", function(res){
+        orm.all(function(res){
             callBack(res);
         });
     },
-   create: function(columns, values, callBack){
-        orm.create("burgers", columns, values, function(res){
+   create: function(burger, callBack){
+        orm.create(burger, function(res){
             callBack(res);
         });
    },
@@ -20,5 +20,5 @@ let burgers = {
    }
 };
 
-module.exports = burgers;
+module.exports = burger;
     

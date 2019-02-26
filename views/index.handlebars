@@ -1,10 +1,57 @@
 <h1> Eat A Burger!</h1>
 
+<h1>Burgers ready to eat</h1>
+{{#each items}}
+    {{#if devoured}}
+    {{else}}
+        <p> {{burger_name}} <button data-id = {{id}} class="devoure">Devoure</button></p> 
+    {{/if}}
+{{/each}}
+
+<h1>Burgers devoured</h1>
+{{#each items}}
+    {{#if devoured}}
+        <p> {{burger_name}}</p> 
+    {{else}}
+    {{/if}}
+{{/each}}
+
 <h2>Add a Burger</h2>
 
-<form>
+<form id="add-burger">
     <label>Add a Burger</label>
     <input id="burger">
     <button type="submit">Add Burger</button>
-
 </form>
+
+<script>
+    $("#add-burger").on("submit",function(event){
+        event.preventDefault();
+        let burger = $("#burger").val();
+        console.log(burger);
+
+        $.post("/api/burgers", {burger: burger}).then(function(data){
+            console.log(data);
+            location.reload()
+        })
+    });
+
+    $(".devoure").on("click", function(){
+        let id = $(this).attr("data-id");
+        let eat = $(this).data()
+        console.log(id)
+        $.ajax("/api/burgers/" + id, {
+          
+
+    }).then(function(data){
+            console.log(data)
+        })
+    })
+
+
+
+
+
+
+
+</script>
